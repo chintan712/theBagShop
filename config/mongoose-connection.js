@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
+const dbgr = require("debug")("test:example"); // only can print the msg who has set the env varibles to "development" namespace 
+const config = require("config");
 
 mongoose
-.connect(`mongodb://127.0.0.1:27017/thebagshop`)
+.connect(`${config.get("MONGODB_URI")}/thebagshop`)
 .then(function(){
-    console.log("Connected!");
+    dbgr("Connected!");
 })
 .catch(function(err){
-    console.log(err);
+    dbgr(err);
 })
-
+    
 module.exports = mongoose.connection;
 
